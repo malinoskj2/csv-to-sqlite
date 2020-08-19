@@ -27,6 +27,14 @@ public class CsvProcessor {
         this.badCsvWriter = badCsvWriter;
     }
 
+    private String[] getHeaderNames () throws IOException {
+        Path myPath = Paths.get(this.csvPath);
+        return Files.lines(myPath)
+                .findFirst()
+                .get()
+                .split(",");
+    }
+
     private void writeLog() throws IOException {
         String logOutput = String.format("%d %s%n%d %s%n%d %s%n",
                 numSuccessful + numFailed, "records received",
